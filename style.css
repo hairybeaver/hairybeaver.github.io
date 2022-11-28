@@ -70,15 +70,10 @@
   }
   
   .card:hover {
-    transform: scale3d(1.25, 1.25, 1);
+    transform: scale3d(1.05, 1.05, 1);
     z-index: 1000;
     box-shadow: 0 1px 32px rgba(0, 0, 0, 0.1);
     transition: all 125ms ease-in;
-  }
-  
-  .card:focus {
-    border-color: royalblue;
-    outline: none;
   }
   
   .card.back {
