@@ -15,18 +15,28 @@ const rules = {
 
 
     //Elke 5
-    "spades_5" : ""
+    "5" : "Sla de volgende speler over. Wordt er op deze kaart nog een andere 5 gelegd, dan sla je 2 spelers over.",
 }
 
 
 
 window.onload=function(){
 
-    const cardnumbers = ["1", "13", "12", "11", "10"]
-    for (const number of cardnumbers){
-        const cardvalue = "spades_" + number
+    const cardtypes = ['spades_', 'clubs_', 'hearts_', 'diamonds_']
+    const cardnumbers = Array(13).fill().map((_, i) => i+1);
+
+    const allcards = cardtypes.flatMap(t => cardnumbers.map(n => t + n))
+
+    console.log(allcards)
+
+    for (const cardvalue of allcards){
 
         const button = document.getElementById(cardvalue);
+        
+        if (!button){
+            console.log(cardvalue)
+        }
+
         button.myParam = cardvalue;
         button.addEventListener("click", getCardInfo);
     }
@@ -34,10 +44,57 @@ window.onload=function(){
 
 
 function getCardInfo(evt) {
-    const cardvalue = evt.currentTarget.myParam
+    let output = ''
+    const fullname = evt.currentTarget.myParam;
+    const splittedname = fullname.split('_')
 
-    if (cardvalue in rules){
-        alert(rules[cardvalue])
+    console.log(splittedname)
+
+    if (splittedname.length > 1){
+        const cardtype = splittedname[0]
+        const cardvalue = splittedname[1]
+
+        const translatedname = translateCardType(cardtype) + '_' + cardvalue
+
+        if (cardvalue in rules) {
+            output = rules[cardvalue]
+        } else if (translatedname in rules) {
+            output = rules[translatedname]
+        } else {
+            output = rules[fullname]
+        }
+
+    } else {
+        //roep functie op
+
+        if (fullname in rules){
+            output = rules[fullname]
+        }
     }
+    
+    console.log(output)
 
+    if (output) {
+        alert(output)
+    }
 }
+
+
+
+function translateCardType(typestring){
+    const typetranslation = {   'spades' : 'black',
+                                'clubs' : 'black',
+                                'hearts' : 'red',
+                                'diamonds' : 'red'  }
+    
+    return typestring in typetranslation? typetranslation[typestring] : ''
+}
+
+
+
+
+
+
+
+
+

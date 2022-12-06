@@ -7,15 +7,17 @@
 
   h1 {
     text-align: center;
+    color: white
   }
   
   h2 {
     text-align: center;
+    color: white;
   }
   
   body {
     font-family: Comfortaa, "Arial Narrow", Arial, 'Card Suits', sans-serif;
-    background: #eee;
+    background: rgb(50, 126, 20);
     padding: 2rem;
   }
   
