@@ -1,66 +1,99 @@
 import { db } from '../firebase.js';
-import { collection, getDocs,addDoc,serverTimestamp } from "firebase/firestore";
+import { collection,doc,getDoc,getDocs,addDoc,serverTimestamp} from "firebase/firestore";
 
-async function addPlayer(playerName) {
+
+//generalised functions
+async function addDocument(collectionName, data) {
   try {
-    const playersCollection = collection(db, "player");
-    const newPlayerRef = await addDoc(playersCollection, {
-      name: playerName,
+    const collectionRef = collection(db, collectionName);
+    const newDocRef = await addDoc(collectionRef, {
+      ...data,
       createdAt: serverTimestamp(),
     });
-    console.log("New player added with ID:", newPlayerRef.id);
+    console.log(`New document added in ${collectionName} with ID:`, newDocRef.id);
   } catch (error) {
-    console.error("Error adding player:", error);
+    console.error(`Error adding document to ${collectionName}:`, error);
   }
 }
 
-async function addTemplate(playerId, numbers) {
+async function getDocument(collectionName, documentId) {
   try {
-    const templatesCollection = collection(db, "template");
-
-    // Convert the 2D array into an array of objects
-    const numbersAsObjects = numbers.map(row => ({ row }));
-
-
-    const newTemplateRef = await addDoc(templatesCollection, {
-      playerId: playerId,
-      cards: numbersAsObjects,
-      createdAt: serverTimestamp(),
-    });
-    console.log("New template added with ID:", newTemplateRef.id);
+    const docRef = doc(db, collectionName, documentId);
+    const docSnapshot = await getDoc(docRef);
+    if (docSnapshot.exists()) {
+      console.log(`Document data from ${collectionName}:`, docSnapshot.data());
+      return docSnapshot.data();
+    } else {
+      console.log(`No such document in ${collectionName}!`);
+    }
   } catch (error) {
-    console.error("Error adding template:", error);
+    console.error(`Error getting document from ${collectionName}:`, error);
   }
 }
 
-async function addSession(sessionName) {
+async function getAllDocuments(collectionName) {
   try {
-    const sessionCollection = collection(db, "session");
-    const newSessionRef = await addDoc(sessionCollection, {
-      name: sessionName,
-      createdAt: serverTimestamp(),
-    });
-    console.log("New session added with ID:", newSessionRef.id);
+    const collectionRef = collection(db, collectionName);
+    const snapshot = await getDocs(collectionRef);
+    const documents = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    console.log(`All documents from ${collectionName}:`, documents);
+    return documents;
   } catch (error) {
-    console.error("Error adding session:", error);
+    console.error(`Error getting all documents from ${collectionName}:`, error);
   }
 }
 
-async function addScore(gameId,playerId,templateId,volgorde,score) {
-  try {
-    const scoreCollection = collection(db, "score");
-    const newScoreRef = await addDoc(scoreCollection, {
-      createdAt: serverTimestamp(),
-      gameId: gameId,
-      playerId: playerId,
-      templateId: templateId,
-      volgorde: volgorde,
-      score: score
-    });
-    console.log("New score added with ID:", newScoreRef.id);
-  } catch (error) {
-    console.error("Error adding score:", error);
-  }
+// Add functions
+async function addPlayer(data) {
+  addDocument("player",data)
+}
+
+async function addTemplate(template) {
+  // Convert the 2D array into an array of objects
+  template['cards'] = template['cards'].map(row => ({ row }));
+  addDocument("template",template)
+}
+
+async function addSession(session) {
+  addDocument("session",session)
+}
+
+async function addScore(score) {
+  addDocument("score",score)
+}
+
+//Get :id functions
+async function getPlayer(playerId) {
+  return getDocument("player",playerId)
+}
+
+async function getTemplate(templateId) {
+  return getDocument("template",templateId)
+}
+
+async function getSession(sessionId) {
+  return getDocument("session",sessionId)
+}
+
+async function getScore(scoreId) {
+  return getDocument("score",scoreId)
+}
+
+//get all
+async function getAllPlayers() {
+  return getAllDocuments("player")
+}
+
+async function getAllTemplates() {
+  return getAllDocuments("template")
+}
+
+async function getAllSessions() {
+  return getAllDocuments("session")
+}
+
+async function getAllScores() {
+  return getAllDocuments("score")
 }
 
 export {
@@ -68,4 +101,12 @@ export {
   addTemplate,
   addScore,
   addSession,
+  getPlayer,
+  getTemplate,
+  getSession,
+  getScore,
+  getAllPlayers,
+  getAllTemplates,
+  getAllSessions,
+  getAllScores 
 };
