@@ -4,27 +4,33 @@ import { collection, getDocs,addDoc } from "firebase/firestore";
 import {
   addPlayer,
   addTemplate,
-  addSession,
   addScore,
+  addSession,
+  getPlayer,
+  getTemplate,
+  getSession,
+  getScore,
+  getAllPlayers,
+  getAllTemplates,
+  getAllSessions,
+  getAllScores
 } from './services/firebaseService';
 
 
 
 
-async function testFirebaseConnection() {
+async function testFirebaseConnectionAdd() {
   console.log("Testing Firebase connection...");
 
   // Test addPlayer()
-  const playerName = 'John Doe';
-  console.log(`Adding player: ${playerName}`);
-  await addPlayer(playerName);
-  await addTemplate("examplePlayerId", [
+  await addPlayer({name: "Bicep arne"});
+  await addTemplate({ playerId:"examplePlayerId2",cards: [
     [1, 2, 3],
     [4, 5, 6],
-    [7, 8, 9]
-  ]);
-  await addSession("sessionName");
-  await addScore("gameId","playerId","templateId",1,1);
+    [7, 8, 19]
+  ]});
+  await addSession({name:"sessionName"});
+  await addScore({sessionId:"gameId",playerId:"playerId",templateId:"templateId",score:1,order:1});
 
   try {
     const playersCollection = collection(db, "player");
@@ -41,5 +47,13 @@ async function testFirebaseConnection() {
   }
 }
 
+async function testFirebaseConnectionGet(){
+  getPlayer("2EiHtKI5TTB40Rj6KPz9")
+  getAllPlayers().then(players => console.log(players));
+}
 
-testFirebaseConnection();
+//node -r esm src/testFirebaseService.js
+
+
+//testFirebaseConnectionAdd();
+testFirebaseConnectionGet();
