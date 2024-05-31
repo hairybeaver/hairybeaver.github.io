@@ -1,0 +1,17 @@
+gamerules,Altijd,"Als deze kaart gelegd wordt, dan mag eender welke speler hier een kaart op leggen die toegankelijk zijn. Spelers van andere kaarten mogen echter niet. Kaarten die op spelregels gelegd worden hebben geen regel en er mag geen 2de dezelfde kaart op deze kaart gespeeld worden.",15
+joker,Altijd,"Als de joker op een andere kaart gelegd wordt, dan neemt deze de de regel van de vorige kaart over. 2 jokers op elkaar nemen allebei de waarde aan van de eerstvolgende normale kaart. Bv: een speler die een joker uitlegt en de vorige kaart was een 7, dan mag deze speler ook naar zijn eigen kaart kijken",0
+1,Altijd,De speler mag nog een kaart van de trekstapel nemen,1
+black_2,Direct afleggen van de trekstapel,De speler mag een kaart van zijn eigen bespeelbare dam op de trekstapel leggen. De volgende speler neemt deze kaart van de trekstapel.,2
+3,Altijd,De oriëntatie van een kaart van deze speler of een andere speler mag veranderd worden door deze kaart 90 graden of pi/2 voor onze wiskundige vriendjes. Van horizontale kaarten worden na het spel de eindscore verdubbeld.,3
+red_4,Altijd,Draai een kaart van iemand anders om zodat deze open komt te liggen.,4
+black_4,Altijd,Draai een kaart van je eigen bespeelbare dam open zodat deze open komt te liggen.,4
+5,Altijd,"De volgende speler zijn beurt wordt overgeslaan. Wordt er op deze 5 nog een 5 gelegd, dan worden er 2 beurten overgeslaan",5
+6,Direct afleggen van de trekstapel,De speler mag nog een kaart van de trekstapel nemen en de richting van het spel verandert.,6
+7,Direct afleggen van de trekstapel,De speler mag naar een kaart van zijn eigen bespeelbare dam kijken en deze stapelen als dit gewenst wordt.,7
+8,Direct afleggen van de trekstapel,De speler mag naar een kaart van een andere speler kijken en deze stapelen.,8
+9,Direct afleggen van de trekstapel,De speler mag 2 kaarten van eender welke spelers verwisselen zonder naar deze kaarten te kijken.,9
+10,Direct afleggen van de trekstapel,De speler mag naar een kaart van zichzelf kijken en naar een kaart van een andere speler en beslissen of hij/zij deze 2 kaarten omwisselt. Dit moet wel vermeld worden tegen de andere speler.,10
+black_11,Direct afleggen van de trekstapel,De speler mag een kaart van zijn eigen bespeelbare dam aan een andere speler geven. Er mogen geen extra rijen gevormd worden,11
+12,Altijd,"De speler mag een kaart van rij wisselen of de oriëntatie van zijn eigen kaart veranderen. Wordt er nog een dame op deze dame gelegd, dan mag de speler die de extra dame hierop legt ook een kaart van rij of oriëntatie veranderen.",12
+hearts_13,Altijd,"Als harige bever gezegd geweest is, wordt deze ongeldig verklaard met deze kaart",13
+diamonds_13,Altijd,"Als harige bever gezegd geweest is, wordt deze ongeldig verklaard met deze kaart. De speler die deze kaart gelegd heeft mag ook het aantal spelers in kaarten van de trekstapel nemen, naar deze kaarten kijken en deze verdelen over de spelers op een rij naar keuze.",13
